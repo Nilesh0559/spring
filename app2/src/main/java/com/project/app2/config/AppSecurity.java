@@ -12,7 +12,9 @@ public class AppSecurity {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.formLogin(Customizer.withDefaults())
-                .authorizeHttpRequests(request -> request.anyRequest().authenticated())
+                .authorizeHttpRequests(request -> request.requestMatchers("/hello")
+                        .authenticated()
+                        .anyRequest().permitAll())
                 .build();
     }
 }
